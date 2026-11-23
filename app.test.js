@@ -7,6 +7,7 @@ test('product-service CRUD', async (t) => {
   const call = (m, p, b) => fetch(base + p, { method: m, body: b && JSON.stringify(b) });
 
   assert.strictEqual((await call('GET', '/health')).status, 200);
+  assert.strictEqual((await (await call('GET', '/version')).json()).version, 'dev');
   assert.strictEqual((await (await call('GET', '/products/2')).json()).name, 'Mouse');
   assert.strictEqual((await call('GET', '/products/99')).status, 404);
 
